@@ -26,6 +26,12 @@
     editor.session.setMode("ace/mode/c_cpp");
 </script>
 <script>
+  async function createWebAssembly(path, importObject) {
+    const result = await window.fetch(path);
+    const bytes = await result.arrayBuffer();
+    return WebAssembly.instantiate(bytes, importObject);
+  }
+
   const memory = new WebAssembly.Memory({initial: 256, maximum: 256});
   let exports = null;
 
